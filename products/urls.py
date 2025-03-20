@@ -9,5 +9,5 @@ app_name = 'products'
 urlpatterns = [
     path('products-fb', product_view),
     path('products-cb', ProductListView.as_view()),
-    path('products-fb/<int:pk>/', product_detail),
+    path('products-fb/<id>/', product_detail),
 ]

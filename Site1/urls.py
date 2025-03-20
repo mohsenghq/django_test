@@ -19,7 +19,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from .views import home_page, contact_us_page, login_page, register_page
+from .views import home_page, contact_us_page, login_page, register_page, logout_page
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('contact-us', contact_us_page, name='contact-us'),
     path('login', login_page, name='login'),
     path('register', register_page, name='register'),
+    path('logout', logout_page, name='logout'),
 ]
 
 if settings.DEBUG:

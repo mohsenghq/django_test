@@ -51,9 +51,14 @@ def register_page(request):
         email = register_form.cleaned_data.get('email')
         password = register_form.cleaned_data.get('password')
         User.objects.create_user(username=username, email=email, password=password)
+        redirect('/login')
     context = {
         'title': 'Register',
         'message': 'This is register page',
         'register_form': register_form
     }
     return render(request, 'auth/register.html', context)
+
+def logout_page(request):
+    logout(request)
+    return redirect('/')

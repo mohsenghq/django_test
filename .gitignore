@@ -1,2 +1,3 @@
 last.md
-staticfiles/
+statics/
+db.sqlite3
