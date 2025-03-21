@@ -1,7 +1,15 @@
 from django.db import models
 
 
+class ProductQuerySet(models.query.QuerySet):
+    def active(self):
+        return self.filter(active=True)
+
 class ProductManager(models.Manager):
+
+    def get_queryset(self):
+        return ProductQuerySet(self.model, using=self._db)
+    
     def get_product_by_id(self, id):
         qs = self.get_queryset().filter(id=id)
         if qs.count() == 1:

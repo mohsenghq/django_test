@@ -62,13 +62,13 @@ class ProductActiveView(ListView):
     context_object_name = 'products'
     
     def get_queryset(self):
-        return Product.objects.get_active_products()
+        return Product.objects.all().active()
     
 
 class ProductActiveDetail(DetailView):
     template_name = "products/product.html"
 
     def get_queryset(self):
-        return Product.objects.get_active_products()
+        return Product.objects.all().active()
 
 
