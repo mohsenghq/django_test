@@ -7,16 +7,22 @@
         <div class="row">
             {% for product in products %}
                 <div class="card" style="width: 18rem;">
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.title }}">
+                    {% endif %}
                     <div class="card-body">
-                    <h5 class="card-title">{{ product.title }}</h5>
-                    <p class="card-text">{{ product.description | truncatewords:15 }}</p>
-                    <a href="/products-fb/{{ product.id }}" class="btn btn-primary">Show</a>
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">{{ product.description | truncatewords:15 }}</p>
+                        {% if request.path == '/products-fb/' %}
+                            <a href="/products-fb/{{ product.id }}/" class="btn btn-primary">Show</a>
+                        {% elif request.path == '/products-cb/' %}
+                            <a href="/products-cb/{{ product.id }}/" class="btn btn-primary">Show</a>
+                        {% elif request.path == '/products-active/' %}
+                            <a href="/products-active/{{ product.id }}/" class="btn btn-primary">Show</a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
-            <div class="col-md-3">
-                
-            </div>
         </div>
+    </div>
 {% endblock %}

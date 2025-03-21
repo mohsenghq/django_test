@@ -7,6 +7,9 @@ class ProductManager(models.Manager):
         if qs.count() == 1:
             return qs.first()
         return None
+    
+    def get_active_products(self):
+        return self.get_queryset().filter(active=True)
 
 # Create your models here.
 class Product(models.Model):
@@ -16,6 +19,7 @@ class Product(models.Model):
     summary = models.TextField(default='This is cool!')
     featured = models.BooleanField(default=False)
     image = models.ImageField(upload_to='products/', null=True, blank=True)
+    active = models.BooleanField(default=False)
 
     objects = ProductManager()
 

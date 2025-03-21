@@ -11,15 +11,6 @@ def product_view(request):
         'products': products
     }
     return render(request, "products/product_view.html", context)
-
-
-class ProductListView(ListView):
-    template_name = "products/product_view.html"
-    queryset = Product.objects.all()
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(ProductListView, self).get_context_data(*args, **kwargs)
-        return context
     
 
 def product_detail(request, id=None, *args, **kwargs):
@@ -40,6 +31,16 @@ def product_detail(request, id=None, *args, **kwargs):
     return render(request, "products/product.html", context)
 
 
+class ProductListView(ListView):
+    template_name = "products/product_view.html"
+    queryset = Product.objects.all()
+    context_object_name = 'products'
+
+    # def get_context_data(self, *args, **kwargs):
+    #     context = super(ProductListView, self).get_context_data(*args, **kwargs)
+    #     return context
+    
+
 class ProductDetailView(DetailView):
     template_name = "products/product.html"
     queryset = Product.objects.all()
@@ -54,3 +55,20 @@ class ProductDetailView(DetailView):
         if instance is None:
             raise Http404("Product does not exist (class based view)")
         return instance
+    
+
+class ProductActiveView(ListView):
+    template_name = "products/product_view.html"
+    context_object_name = 'products'
+    
+    def get_queryset(self):
+        return Product.objects.get_active_products()
+    
+
+class ProductActiveDetail(DetailView):
+    template_name = "products/product.html"
+
+    def get_queryset(self):
+        return Product.objects.get_active_products()
+
+
