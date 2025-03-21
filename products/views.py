@@ -62,13 +62,22 @@ class ProductActiveView(ListView):
     context_object_name = 'products'
     
     def get_queryset(self):
-        return Product.objects.get_active_products()
+        return Product.objects.all().active()
     
 
 class ProductActiveDetail(DetailView):
     template_name = "products/product.html"
 
     def get_queryset(self):
-        return Product.objects.get_active_products()
+        return Product.objects.all().active()
+    
+
+class ProductShowWithSlug(DetailView):
+    template_name = "products/product.html"
+
+    def get_object(self, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        instance = get_object_or_404(Product, slug=slug)
+        return instance
 
 
