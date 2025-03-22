@@ -70,8 +70,6 @@ class ProductActiveDetail(DetailView):
 
     def get_queryset(self):
         return Product.objects.all().active()
-<<<<<<< HEAD
-    
 
 class ProductShowWithSlug(DetailView):
     template_name = "products/product.html"
@@ -80,7 +78,5 @@ class ProductShowWithSlug(DetailView):
         slug = self.kwargs.get('slug')
         instance = get_object_or_404(Product, slug=slug)
         return instance
-=======
->>>>>>> 7711c2d78722ed33083dc879c7eab223958e7ded
 
 
